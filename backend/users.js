@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://users:users@ds263989.mlab.com:63989/nickiscool")
+mongoose.connect("mongodb://users:users@ds113870.mlab.com:13870/nickiscool")
 
 //creating a test schema
 const userSchema = mongoose.Schema({

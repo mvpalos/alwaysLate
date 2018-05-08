@@ -5,12 +5,13 @@ const jwt = require('jsonwebtoken');
 const router = require("./routes.js");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+const secret = process.argv[2];
 
 // console.log(bcrypt.hashSync("fish123", 10));
 
 app.use(router);
     //connectiong to the server (sockets)
-    io.on("connection", (socket)=>{
+    io.on("connection", (socket) =>{
         //a user has connected
         //this will create a new user
         socket.on("adduser", (data)=>{

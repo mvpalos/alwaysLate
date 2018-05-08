@@ -1,40 +1,64 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-let newsFeed =[];
-
 class Profile extends React.Component {
     constructor() {
         super()
         this.state = {
             value: '',
-            isLoading: false,
             results: []
         }
     }
-   
-componentDidMount(){
+componentWillMount(){
     console.log('hit')
     axios.get('http://localhost:8080/profile')
         .then((result)=>{
-            newsFeed.push(result.data.articles);      
-        });
-}   
+            this.newsFeed = result.data.articles;
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+}  
+
 
     render(){
         let submitType ={
             fontFamily: 'Open Sans, sans-serif',
             fontSize: '15px'
         }
+
+        let newsFeedjsx = [];
+
+        if (this.newsFeed)
+        {
+            newsFeedjsx = this.newsFeed.map((value) => value);
+        }
+
         return(
             <div>
-                <div class="container"></div>
+                 <div class="Newscontainer"></div>
                 <h2 className="todaysStories">Today's Top Stories</h2>
-                <form class="search-form" action="/search" method="GET">
-                    <input style={submitType}type="text" name="searchParams" />
-                    <input style={submitType}type="submit" value="submit"/>
-                </form>
-                {newsFeed}
+                <div className = "newsText">
+                {newsFeedjsx.map((value) => 
+                <div className="row">
+                <div className="col-sm-4"><img src={value.urlToImage}></img></div>
+                <div className="col-sm-8"><h>{value.title}</h><p>{value.description}</p></div>
+                </div>)}
+
+                {/*
+
+                 <div class="container"></div>
+                <h2 className="todaysStories">Today's Top Stories</h2>
+                
+                {newsFeedjsx.map((value) => 
+                <div className="newsText">
+                <img src={value.urlToImage}></img>
+                <h>{value.title}</h>
+                <p>{value.description}</p>
+                </div>)}
+                
+                */}
+                </div>
             </div>
         )
     }

@@ -14,7 +14,6 @@ class Chat extends React.Component{
         this.sendMessageSubmitHandler = this.sendMessageSubmitHandler.bind(this);
         this.sendMessageEnterHandler = this.sendMessageEnterHandler.bind(this);
     }
-
     componentDidMount(){
         //check to see if there is a valid jwt token
         axios.post("http://localhost:8080/validtoken", {
@@ -22,7 +21,7 @@ class Chat extends React.Component{
         })
         .then((results) =>{
             if (results.data.error){
-                console.log("error: no valid jwt")
+                console.log("error: invalid valid jwt")
             }
             else{
                 this.socket = io("http://localhost:8080");
@@ -35,9 +34,8 @@ class Chat extends React.Component{
                     });
                 this.socket.on("displaymessage", (data) =>{
                         let isScrolledDown = false;
-                        const chatContainer = document.getElementById("chat_container");
-                    if (chatContainer.clientHeight + Math.ceil(chatContainer.scrollTop) >= chatContainer.scrollHeight)
-                        {
+                        const chatContainer = document.getElementById("chat-box");
+                    if (chatContainer.clientHeight + Math.ceil(chatContainer.scrollTop) >= chatContainer.scrollHeight){
                             isScrolledDown = true;
                         }
 
@@ -52,19 +50,16 @@ class Chat extends React.Component{
                             messages: messages
                         });
 
-                        if (isScrolledDown)
-                        {
+                        if (isScrolledDown){
                             chatContainer.scrollTop = chatContainer.scrollHeight;
                         }
                     });
 
-                    this.socket.on("reconnect", () =>
-                    {
+                    this.socket.on("reconnect", () =>{
                         this.socket.emit("adduser", {jwt: localStorage.getItem("jwt")});
                     });
 
-                    this.socket.on("kick", () =>
-                    {
+                    this.socket.on("kick", () =>{
                         localStorage.removeItem("jwt");
                         this.props.history.push("/login");
                     });
@@ -76,38 +71,27 @@ class Chat extends React.Component{
             console.log(error);
         });
     }
-
-    componentWillUnmount()
-    {
-        if (this.socket)
-        {
+    componentWillUnmount(){
+        if (this.socket){
             this.socket.disconnect();
         }
     }
-
-
-    sendMessageSubmitHandler(event)
-    {
+    sendMessageSubmitHandler(event){
         event.preventDefault();
-
-        if (event.target.message && this.socket)
-        {
+        if (event.target.message && this.socket){
             this.socket.emit("sendmessage", {message: event.target.message.value, jwt: localStorage.getItem("jwt")});
             document.getElementById("message").value = "";
         }
     }
 
-    sendMessageEnterHandler(event)
-    {
-        if (event.target && this.socket && event.keyCode === 13)
-        {
+    sendMessageEnterHandler(event){
+        if (event.target && this.socket && event.keyCode === 13){
             this.socket.emit("sendmessage", {message: event.target.value, jwt: localStorage.getItem("jwt")});
             document.getElementById("message").value = "";
         }
     }
 
-    render()
-    {
+    render(){
         let submitType ={
             fontFamily: 'Open Sans, sans-serif',
             fontSize: '15px'
@@ -124,7 +108,7 @@ class Chat extends React.Component{
                                         <button style={submitType} data-toggle="modal" data-target="#users_modal">Users <span className="badge badge-danger">{this.state.users.length}</span></button>
                                     </div>
                                     <div id="chat-box" className = "talkToTalk" style={{height: "250px", overflow: "auto", margin: "10px", border: "solid white 1px", borderRadius: "5px", backgroundColor: "azure"}}>
-                                        {this.state.messages.map((value, index) => <div key={index} style={{margin: "15px", padding: "10px", borderBottom: "solid gray 1px", wordWrap: "break-word"}}><h4>{value.alias}</h4><p style={{marginBottom: "0px"}}>{value.message}</p></div>)}
+                                        {this.state.messages.map((value, index) => <div key={index} className="chatText"><p>{value.alias}</p><p style={{marginBottom: "0px"}}>{value.message}</p></div>)}
                                     </div>
                                     <div className="chatContainer" style={{padding: "10px"}}>
                                         <form onSubmit={this.sendMessageSubmitHandler}>

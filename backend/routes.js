@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
@@ -6,6 +5,7 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const User = require('./users.js');
+const axios = require('axios');
 const secret = process.argv[2];
 //MAPS KEY
 const mapsKey = "AIzaSyAzShzYVDY-JpgXbGHxBxAz5NBMpvdSt5E";
@@ -152,13 +152,14 @@ router.post('/login',(req, res)=>{
 //NEWS API
 let url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=faca3a39887d444faa03f1a248e6572a';
 
-router.post('/profile', (req, res)=>{
-    console.log('hitback')
-    request(url,(error, res, body)=>{
-        if(!error){
-            let text = JSON.parse(body);
-            res.send(text.data.articles)
-        }
+router.get('/profile', (req, res)=>{
+    axios.get(url)
+    .then((result)=>{
+        res.send(result.data)
+    })
+    .catch((error) =>
+    {
+        console.log("this doesn't work :(");
     })
 });
 
