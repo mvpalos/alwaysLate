@@ -11,7 +11,7 @@ class Profile extends React.Component {
     }
 componentWillMount(){
     console.log('hit')
-    axios.get('http://localhost:8080/profile')
+    axios.get('/profile')
         .then((result)=>{
             this.newsFeed = result.data.articles;
         })

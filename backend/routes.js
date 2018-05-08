@@ -13,6 +13,7 @@ const mapsKey = "AIzaSyAzShzYVDY-JpgXbGHxBxAz5NBMpvdSt5E";
 router.use(cors());
 router.use(bodyParser.urlencoded({extended: false}));
 router.use(bodyParser.json());
+router.use(express.static(__dirname+'/build'));
 
                 User.find({})
                     .then((results) =>
@@ -23,7 +24,6 @@ router.use(bodyParser.json());
                     {
                         console.log(error);
                     });
-
 
 //giving valid token to endpoint /validtoken
 //'secret' represents the jwt token encrypted
@@ -177,6 +177,10 @@ router.post('/search',(req, res)=>{
         else{
             res.render('error', {msg: "your search result did not match anything!"})
         }
+});
+
+router.get('*',(req,res)=>{
+    res.sendfile(__dirname + '/build/index.html');
 });
 
 

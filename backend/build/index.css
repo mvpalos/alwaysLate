@@ -1,0 +1,120 @@
+
+@-webkit-keyframes pulse
+{
+    0% {fill: #3a99f7;}
+    25% {fill: #FFF5A5;}
+    50% {fill: #FFD4DA;}
+    75% {fill: #99D2E4;}
+    100% {fill: #D8CAB4;}
+}
+
+.svg-logo{
+    width: 100%;
+    margin: auto;
+
+}
+
+.cls-1{
+    font-size:200px;
+    fill:#75b6fc;
+    -webkit-animation: pulse 10s infinite alternate;
+    font-family:SanFranciscoDisplay-Light, San Francisco Display;
+    letter-spacing:0.7em;
+    letter-spacing:0.7em;
+}
+
+
+h1
+{
+    font-family: 'Open Sans', sans-serif;
+}
+
+p
+{
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.header
+{
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+}
+
+.header:hover
+{
+    color: rebeccapurple;
+    text-decoration: none;
+ }
+
+ .todaysStories
+{
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+    color:#75b6fc;
+}
+
+.userBox
+{
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+    color: white;
+}
+
+
+.chatBox{
+    font-size: 30px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+    background-color:#D9F7FE;
+}
+
+.chatContainer{
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+    background-color:#D9F7FE; 
+    border-width: 5px;
+}
+
+.talkToTalk {
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+    color: azure;
+}
+
+.textContainer{
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px;
+    width: 90%;
+    height: 90%;
+    color:#86909b;
+    border-style: solid;
+    border-width:1px;
+}
+
+.chatText{
+    font-size: .5em;
+    margin: 15px;
+    padding: 10px; 
+    border-bottom: solid gray 1px;
+    word-wrap: break-word;
+    color:black;
+}
+
+.newsText{
+    font-size: 1em; 
+    margin: 7em;
+    float: left;
+}
+
+img{
+    width:50%;
+    display: inline;
+}
