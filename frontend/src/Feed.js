@@ -25,7 +25,7 @@ this.logoutHandler = this.logoutHandler.bind(this);
     }
 
 componentDidMount(){
-        axios.post("http://localhost:8080/validtoken",{
+        axios.post("/validtoken",{
             jwt: localStorage.getItem("jwt")
         })
         .then(result=>{

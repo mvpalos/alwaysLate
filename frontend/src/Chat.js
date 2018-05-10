@@ -16,7 +16,7 @@ class Chat extends React.Component{
     }
     componentDidMount(){
         //check to see if there is a valid jwt token
-        axios.post("http://localhost:8080/validtoken", {
+        axios.post("/validtoken", {
             jwt: localStorage.getItem("jwt")
         })
         .then((results) =>{
@@ -24,7 +24,7 @@ class Chat extends React.Component{
                 console.log("error: invalid valid jwt")
             }
             else{
-                this.socket = io("http://localhost:8080");
+                this.socket = io("/");
                 if (this.socket){
                     this.socket.emit("adduser", {jwt: localStorage.getItem("jwt")});
                     this.socket.on("updateusers", (data) =>{

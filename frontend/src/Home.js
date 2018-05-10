@@ -8,7 +8,7 @@ class Home extends Component {
     componentWillMount()
     {
         //checking validity of JWT (authoritization token)
-        axios.post('http://localhost:8080/validtoken',({jwt:localStorage.getItem("jwt")}))
+        axios.post('/validtoken',({jwt:localStorage.getItem("jwt")}))
         .then((result)=>{
             //if there username or password is not sending an error,(account isnt made)
             //push the props(of all forms filled) to changing browser endpoint of '/feed'
@@ -25,7 +25,7 @@ class Home extends Component {
     handleSubmit = (event)=> {
         event.preventDefault(); 
         // //send usernamand password when the user clicks log in
-        axios.post('http://localhost:8080/login', {
+        axios.post('/login', {
             userName: event.target.userName.value, 
             password: event.target.password.value
             })

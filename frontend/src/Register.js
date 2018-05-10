@@ -17,7 +17,7 @@ class Register extends Component {
 
 componentWillMount(){
          //checking validity of JWT (authoritization token)
-         axios.post('http://localhost:8080/validtoken',({jwt:localStorage.getItem("jwt")}))
+         axios.post('/validtoken',({jwt:localStorage.getItem("jwt")}))
          .then((result)=>{
              //if there username or password is not sending an error,(account isnt made)
              //push the props(of all forms filled) to changing browser endpoint of '/feed'
@@ -36,7 +36,7 @@ registerHandler(e){
 
     if (e.target.username && e.target.password)
     {
-        axios.post("http://localhost:8080/register", {
+        axios.post("/register", {
             username: e.target.username.value,
             password: e.target.password.value
         })
